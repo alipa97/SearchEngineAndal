@@ -1,13 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Web Crawler Search</title>
+    <meta charset="UTF-8">
+    <title>Mesin Pencari Andal</title>
 </head>
 <body>
-  <h1>Search UPI Site</h1>
-  <form method="POST" action="/search">
-    <input type="text" name="keyword" required>
-    <button type="submit">Search</button>
-  </form>
+    <h1>Mesin Pencari Andal</h1>
+    
+    <form action="/search" method="get">
+        <input type="text" name="keyword" placeholder="Masukkan kata kunci">
+        <button type="submit">Cari</button>
+    </form>
+
+    <form action="/crawl" method="post">
+        <button type="submit">Crawl Ulang</button>
+    </form>
 </body>
 </html>

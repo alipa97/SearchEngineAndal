@@ -2,8 +2,13 @@ from app.database import get_pages
 
 def search_keyword(keyword):
     keyword = keyword.lower()
-    results = []
-    for page in get_pages():
-        if keyword in page['text'].lower():
-            results.append(page)
-    return results[:10]  # limit result
+    matched_urls = []
+    for url, data in index.items():
+        if keyword in data["text"]:
+            path = crawler.shortest_path.get(url, [url])
+            matched_urls.append({
+                "url": url,
+                "title": data["title"],
+                "path": path
+            })
+    return matched_urls

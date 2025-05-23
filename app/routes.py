@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request
-from app.crawler.bfs import crawl
+from app.crawler.crawler import crawl
 from app.search.engine import search_keyword
 
 main = Blueprint('main', __name__)

@@ -1,17 +1,25 @@
 <!DOCTYPE html>
-<html>
-<head><title>Results</title></head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hasil Pencarian</title>
+</head>
 <body>
-  <h1>Results for '{{ keyword }}'</h1>
-  <ul>
-  {% for result in results %}
-    <li>
-      <a href="{{ result.url }}" target="_blank">{{ result.title }}</a>
-      <br>
-      <a href="/route?url={{ result.url }}">Lihat Rute Link</a>
-    </li>
-  {% endfor %}
-  </ul>
-  <a href="/">Back</a>
+    <h1>Hasil pencarian untuk: "{{ keyword }}"</h1>
+    <ul>
+        {% for result in results %}
+            <li>
+                <a href="{{ result['url'] }}">{{ result['title'] }}</a><br>
+                <small>Rute: 
+                    {% for step in result['path'] %}
+                        {{ loop.index }}. <a href="{{ step }}">{{ step }}</a>{% if not loop.last %} → {% endif %}
+                    {% endfor %}
+                </small>
+            </li>
+        {% else %}
+            <li>Tidak ditemukan hasil.</li>
+        {% endfor %}
+    </ul>
+    <a href="/">Kembali</a>
 </body>
 </html>
