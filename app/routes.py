@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request
 from app.crawler.crawler import crawl
-from app.search.engine import search_keyword_bfs, search_keyword_dfs
+from app.search.engine import search_keyword_bfs, search_keyword_dfs, get_bfs_all_routes, get_dfs_all_routes
 
 main = Blueprint('main', __name__)
 
@@ -14,9 +14,11 @@ def search():
     algo = request.form.get('algo', 'bfs')
     if algo == 'dfs':
         results = search_keyword_dfs(keyword)
+        all_routes = get_dfs_all_routes()
     else:
         results = search_keyword_bfs(keyword)
-    return render_template('results.html', keyword=keyword, results=results)
+        all_routes = get_bfs_all_routes()
+    return render_template('results.html', keyword=keyword, results=results, algo=algo, all_routes=all_routes)
 
 @main.route('/route')
 def route():
