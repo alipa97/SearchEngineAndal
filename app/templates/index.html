@@ -7,12 +7,13 @@
 <body>
     <h1>Mesin Pencari Andal</h1>
     
-    <form action="/search" method="get">
+    <form action="/search" method="post">
         <input type="text" name="keyword" placeholder="Masukkan kata kunci">
         <button type="submit">Cari</button>
     </form>
 
     <form action="/crawl" method="post">
+        <input type="text" name="seed_url" placeholder="Seed URL (opsional)" value="https://www.upi.edu/">
         <button type="submit">Crawl Ulang</button>
     </form>
 </body>

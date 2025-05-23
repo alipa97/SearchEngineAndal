@@ -16,6 +16,7 @@ def crawl(seed_url, max_pages=100):
         current_url, path = queue.popleft()
         if current_url in visited:
             continue
+        print(f"Crawling: {current_url}")  # DEBUG: tampilkan url yang sedang di-crawl
         try:
             response = requests.get(current_url, timeout=5)
             soup = BeautifulSoup(response.text, 'html.parser')
@@ -28,5 +29,6 @@ def crawl(seed_url, max_pages=100):
                 next_url = urljoin(current_url, link['href'])
                 if next_url not in visited and is_same_domain(next_url, seed_domain):
                     queue.append((next_url, path + [next_url]))
-        except:
+        except Exception as e:
+            print(f"Error crawling {current_url}: {e}")  # DEBUG: tampilkan error jika ada
             continue
