@@ -3,18 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>Mesin Pencari Andal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+      :root {
+        --smartloop-pink: #ff5fa2;
+        --smartloop-pink-light: #ffe3ef;
+      }
+      .bg-smartloop {
+        background: linear-gradient(90deg, var(--smartloop-pink) 0%, #ffb6d5 100%);
+      }
+      .text-smartloop {
+        color: var(--smartloop-pink);
+      }
+      .border-smartloop {
+        border-color: var(--smartloop-pink);
+      }
+      .focus\:ring-smartloop:focus {
+        --tw-ring-color: var(--smartloop-pink);
+      }
+    </style>
 </head>
-<body>
-    <h1>Mesin Pencari Andal</h1>
-    
-    <form action="/search" method="post">
-        <input type="text" name="keyword" placeholder="Masukkan kata kunci">
-        <button type="submit">Cari</button>
-    </form>
-
-    <form action="/crawl" method="post">
-        <input type="text" name="seed_url" placeholder="Seed URL (opsional)" value="https://spada.upi.edu/">
-        <button type="submit">Crawl</button>
-    </form>
+<body class="min-h-screen bg-smartloop bg-opacity-10 flex flex-col items-center justify-center">
+    <div class="w-full max-w-md bg-white rounded-xl shadow-lg p-8 mt-10 border border-smartloop">
+        <h1 class="text-3xl font-bold mb-6 text-center text-smartloop">Mesin Pencari <span class="font-extrabold">Andal</span></h1>
+        <form action="/search" method="post" class="mb-6">
+            <input type="text" name="keyword" placeholder="Masukkan kata kunci" class="w-full px-4 py-2 border border-smartloop rounded-lg focus:outline-none focus:ring-2 focus:ring-smartloop mb-3" required>
+            <button type="submit" class="w-full py-2 rounded-lg bg-smartloop text-white font-semibold hover:bg-pink-500 transition">Cari</button>
+        </form>
+        <form action="/crawl" method="post" class="mb-2">
+            <input type="text" name="seed_url" placeholder="Seed URL (opsional)" value="https://spada.upi.edu/" class="w-full px-4 py-2 border border-smartloop rounded-lg focus:outline-none focus:ring-2 focus:ring-smartloop mb-3">
+            <button type="submit" class="w-full py-2 rounded-lg bg-white text-smartloop border border-smartloop font-semibold hover:bg-smartloop hover:text-white transition">Crawl</button>
+        </form>
+    </div>
+    <footer class="mt-10 text-center text-sm text-gray-400">&copy; 2025 Mesin Pencari Andal</footer>
 </body>
 </html>

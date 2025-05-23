@@ -1,8 +1,27 @@
 <!DOCTYPE html>
-<html>
-<head><title>Route</title></head>
-<body>
-  <h1>Route Link</h1>
-  <!-- Isi nanti berdasarkan path -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Route Link</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+      :root {
+        --smartloop-pink: #ff5fa2;
+        --smartloop-pink-light: #ffe3ef;
+      }
+      .text-smartloop { color: var(--smartloop-pink); }
+      .bg-smartloop { background: linear-gradient(90deg, var(--smartloop-pink) 0%, #ffb6d5 100%); }
+      .border-smartloop { border-color: var(--smartloop-pink); }
+      .focus\:ring-smartloop:focus { --tw-ring-color: var(--smartloop-pink); }
+    </style>
+</head>
+<body class="min-h-screen bg-smartloop bg-opacity-10 flex flex-col items-center justify-center">
+    <div class="w-full max-w-xl bg-white rounded-xl shadow-lg p-8 mt-10 border border-smartloop">
+        <h1 class="text-2xl font-bold mb-6 text-smartloop text-center">Route Link</h1>
+        <!-- Isi nanti berdasarkan path -->
+        <div class="text-center text-gray-400">Belum ada data rute.</div>
+        <a href="/" class="block mt-8 text-center text-smartloop font-semibold hover:underline">Kembali</a>
+    </div>
 </body>
 </html>
