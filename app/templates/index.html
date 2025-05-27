@@ -2,170 +2,293 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Mesin Pencari Andal</title>
+  <title>Search Engine Andal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Inter', sans-serif; }
-    .glass-effect {
-      background: rgba(255, 255, 255, 0.15);
+    body { 
+      font-family: 'Plus Jakarta Sans', sans-serif; 
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    .glass-card {
+      background: rgba(255, 255, 255, 0.8);
       backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     }
-    .search-input {
+    
+    .input-field {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1.5px solid rgba(236, 72, 153, 0.2);
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .search-input:focus {
+    
+    .input-field:focus {
       transform: translateY(-1px);
-      box-shadow: 0 10px 25px -3px rgba(236, 72, 153, 0.3);
+      border-color: rgba(236, 72, 153, 0.4);
+      box-shadow: 
+        0 8px 20px -4px rgba(236, 72, 153, 0.2),
+        0 0 0 3px rgba(236, 72, 153, 0.1);
+      background: rgba(255, 255, 255, 0.95);
     }
+    
     .btn-primary {
-      background: linear-gradient(135deg, #ec4899, #be185d, #831843);
+      background: linear-gradient(135deg, #ec4899 0%, #be185d 50%, #9d174d 100%);
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
+    
     .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 10px 20px -2px rgba(236, 72, 153, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px -4px rgba(236, 72, 153, 0.3);
     }
+    
     .btn-secondary {
-      background: linear-gradient(135deg, rgba(236, 72, 153, 0.1), rgba(190, 24, 93, 0.1));
-      border: 1px solid rgba(236, 72, 153, 0.3);
+      background: rgba(255, 255, 255, 0.7);
+      border: 1.5px solid rgba(236, 72, 153, 0.3);
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
+    
     .btn-secondary:hover {
-      background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(190, 24, 93, 0.2));
+      background: rgba(236, 72, 153, 0.05);
+      border-color: rgba(236, 72, 153, 0.4);
       transform: translateY(-1px);
-      box-shadow: 0 8px 16px -2px rgba(236, 72, 153, 0.25);
+      box-shadow: 0 8px 16px -4px rgba(236, 72, 153, 0.2);
     }
-    .floating-orb {
-      animation: float 8s ease-in-out infinite;
+    
+    .radio-custom {
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(236, 72, 153, 0.3);
+      border-radius: 50%;
+      position: relative;
+      transition: all 0.2s ease;
+      cursor: pointer;
     }
+    
+    .radio-custom:checked {
+      border-color: #ec4899;
+      background: #ec4899;
+    }
+    
+    .radio-custom:checked::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 6px;
+      height: 6px;
+      background: white;
+      border-radius: 50%;
+    }
+    
+    .floating-element {
+      animation: float 10s ease-in-out infinite;
+    }
+    
     @keyframes float {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      33% { transform: translateY(-20px) rotate(120deg); }
-      66% { transform: translateY(-10px) rotate(240deg); }
+      0%, 100% { 
+        transform: translateY(0px) rotate(0deg); 
+        opacity: 0.4;
+      }
+      50% { 
+        transform: translateY(-20px) rotate(180deg); 
+        opacity: 0.6;
+      }
     }
-    .fade-in {
-      animation: fadeIn 1s ease-out;
+    
+    .slide-in {
+      animation: slideIn 0.6s ease-out;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    
+    @keyframes slideIn {
+      from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+      }
+      to { 
+        opacity: 1; 
+        transform: translateY(0); 
+      }
     }
-    .smart-gradient {
-      background: linear-gradient(135deg, #fce7f3, #f3e8ff, #fdf2f8);
+    
+    .gradient-bg {
+      background: linear-gradient(135deg, 
+        #fef7ff 0%,
+        #fdf2f8 25%,
+        #fce7f3 50%,
+        #f3e8ff 75%,
+        #fef7ff 100%);
     }
-    .pink-accent {
+    
+    .text-gradient {
       background: linear-gradient(135deg, #ec4899, #be185d);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
+
+    .icon-container {
+      background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+      box-shadow: 0 4px 12px -2px rgba(236, 72, 153, 0.3);
+    }
+
+    .step-number {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ec4899, #be185d);
+      color: white;
+      font-size: 11px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 8px;
+      flex-shrink: 0;
+    }
+
+    .divider-simple {
+      height: 1px;
+      background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(236, 72, 153, 0.3) 50%, 
+        transparent 100%);
+      margin: 20px 0;
+    }
   </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center smart-gradient relative overflow-hidden">
-  <!-- Subtle background patterns -->
-  <div class="absolute inset-0 overflow-hidden">
-    <div class="absolute top-20 right-32 w-64 h-64 bg-gradient-to-br from-pink-300/20 to-purple-300/20 rounded-full blur-3xl floating-orb"></div>
-    <div class="absolute bottom-32 left-20 w-80 h-80 bg-gradient-to-br from-rose-300/15 to-pink-300/15 rounded-full blur-3xl floating-orb" style="animation-delay: -3s;"></div>
-    <div class="absolute top-1/3 left-1/2 w-40 h-40 bg-gradient-to-br from-fuchsia-300/10 to-rose-300/10 rounded-full blur-2xl floating-orb" style="animation-delay: -5s;"></div>
+<body class="min-h-screen flex flex-col items-center justify-center gradient-bg relative overflow-hidden">
+  <!-- Background decorative elements -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute top-20 right-32 w-48 h-48 bg-gradient-to-br from-pink-300/10 to-purple-300/10 rounded-full blur-3xl floating-element"></div>
+    <div class="absolute bottom-32 left-20 w-56 h-56 bg-gradient-to-br from-rose-300/8 to-pink-300/8 rounded-full blur-3xl floating-element" style="animation-delay: -3s;"></div>
+    <div class="absolute top-1/3 left-1/2 w-32 h-32 bg-gradient-to-br from-fuchsia-300/6 to-rose-300/6 rounded-full blur-2xl floating-element" style="animation-delay: -5s;"></div>
   </div>
 
-  <div class="relative z-10 w-full max-w-md mx-4 fade-in">
-    <!-- Main interface card -->
-    <div class="glass-effect rounded-3xl shadow-xl p-8">
-      <!-- Header section -->
-      <div class="text-center mb-8">
-        <div class="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-pink-500 to-rose-600 rounded-2xl mb-4 shadow-lg">
-          <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <div class="relative z-10 w-full max-w-md mx-4 slide-in">
+    <!-- Main card -->
+    <div class="glass-card rounded-2xl p-6">
+      <!-- Header -->
+      <div class="text-center mb-5">
+        <div class="icon-container inline-flex items-center justify-center w-12 h-12 rounded-xl mb-3">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
           </svg>
         </div>
-        <h1 class="text-2xl font-bold text-gray-800 mb-1">
-          Mesin Pencari <span class="pink-accent font-extrabold">Andal</span>
+        <h1 class="text-xl font-bold text-gray-800 mb-1">
+          Search Engine <span class="text-gradient font-extrabold">Andal</span>
         </h1>
-        <p class="text-gray-600 text-sm font-medium">Smart search, reliable results</p>
+        <p class="text-gray-600 text-sm">Pencarian cerdas dengan hasil terpercaya</p>
       </div>
 
-      <!-- Primary search form -->
-      <form action="/search" method="post" class="mb-6">
-        <div class="relative mb-4">
-          <input
-            type="text"
-            name="keyword"
-            placeholder="Enter your search query"
-            required
-            class="search-input w-full px-5 py-4 bg-white/80 border border-pink-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-transparent text-gray-800 placeholder-gray-500 font-medium"
-          />
-          <div class="absolute inset-y-0 right-0 flex items-center pr-5 pointer-events-none">
-            <svg class="w-5 h-5 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
+      <!-- Step 1: Web Crawling -->
+      <div class="mb-4">
+        <div class="flex items-center mb-2">
+          <div class="step-number">1</div>
+          <h3 class="text-sm font-semibold text-gray-700">Web Crawling</h3>
+        </div>
+        
+        <form action="/crawl" method="post">
+          <div class="mb-2">
+            <div class="relative">
+              <input
+                type="text"
+                name="seed_url"
+                placeholder="Masukkan URL untuk web crawling..."
+                class="input-field w-full px-4 py-2.5 rounded-xl focus:outline-none text-gray-800 placeholder-gray-500 text-sm"
+              />
+              <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
+                <svg class="w-4 h-4 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+                </svg>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="flex items-center mb-3">
-          <label class="mr-4 text-pink-500 font-semibold">Algoritma:</label>
-          <label class="mr-4 flex items-center"><input type="radio" name="algo" value="bfs" checked class="mr-1">BFS</label>
-          <label class="flex items-center"><input type="radio" name="algo" value="dfs" class="mr-1">DFS</label>
-        </div>
-        <button
-          type="submit"
-          class="btn-primary w-full py-4 rounded-2xl text-white font-semibold shadow-lg"
-        >
-          Search Now
-        </button>
-      </form>
-
-      <!-- Elegant divider -->
-      <div class="flex items-center my-6">
-        <div class="flex-1 h-px bg-gradient-to-r from-transparent via-pink-300 to-transparent"></div>
-        <span class="px-4 text-gray-500 text-sm font-medium bg-white/50 rounded-full">or</span>
-        <div class="flex-1 h-px bg-gradient-to-r from-transparent via-pink-300 to-transparent"></div>
+          
+          <div class="flex items-center gap-4 mb-3">
+            <span class="text-pink-600 font-medium text-sm">Mode Crawl:</span>
+            <label class="flex items-center gap-1.5 cursor-pointer">
+              <input type="radio" name="crawl_algo" value="bfs" checked class="radio-custom">
+              <span class="text-sm text-gray-700">BFS</span>
+            </label>
+            <label class="flex items-center gap-1.5 cursor-pointer">
+              <input type="radio" name="crawl_algo" value="dfs" class="radio-custom">
+              <span class="text-sm text-gray-700">DFS</span>
+            </label>
+          </div>
+          
+          <button type="submit" class="btn-primary w-full py-2.5 rounded-xl text-white font-medium text-sm">
+            Mulai Crawling
+          </button>
+        </form>
       </div>
 
-      <!-- Secondary crawl form -->
-      <form action="/crawl" method="post">
-        <div class="relative mb-4">
-          <input
-            type="text"
-            name="seed_url"
-            placeholder="Enter URL for web crawling"
-            class="search-input w-full px-5 py-4 bg-white/80 border border-pink-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-transparent text-gray-800 placeholder-gray-500 font-medium"
-          />
-          <div class="absolute inset-y-0 right-0 flex items-center pr-5 pointer-events-none">
-            <svg class="w-5 h-5 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
-            </svg>
+      <!-- Simple divider -->
+      <div class="divider-simple"></div>
+
+      <!-- Step 2: Search -->
+      <div>
+        <div class="flex items-center mb-2">
+          <div class="step-number">2</div>
+          <h3 class="text-sm font-semibold text-gray-700">Pencarian Keyword</h3>
+        </div>
+
+        <form action="/search" method="post">
+          <div class="mb-2">
+            <div class="relative">
+              <input
+                type="text"
+                name="keyword"
+                placeholder="Masukkan kata kunci pencarian..."
+                required
+                class="input-field w-full px-4 py-2.5 rounded-xl focus:outline-none text-gray-800 placeholder-gray-500 text-sm"
+              />
+              <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
+                <svg class="w-4 h-4 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="flex items-center mb-3">
-          <label class="mr-4 text-pink-500 font-semibold">Mode Crawl:</label>
-          <label class="mr-4 flex items-center"><input type="radio" name="crawl_algo" value="bfs" checked class="mr-1">BFS</label>
-          <label class="flex items-center"><input type="radio" name="crawl_algo" value="dfs" class="mr-1">DFS</label>
-        </div>
-        <button
-          type="submit"
-          class="btn-secondary w-full py-4 rounded-2xl text-pink-700 font-semibold backdrop-blur-sm"
-        >
-          Start Crawling
-        </button>
-      </form>
+          
+          <div class="flex items-center gap-4 mb-3">
+            <span class="text-pink-600 font-medium text-sm">Algoritma:</span>
+            <label class="flex items-center gap-1.5 cursor-pointer">
+              <input type="radio" name="algo" value="bfs" checked class="radio-custom">
+              <span class="text-sm text-gray-700">BFS</span>
+            </label>
+            <label class="flex items-center gap-1.5 cursor-pointer">
+              <input type="radio" name="algo" value="dfs" class="radio-custom">
+              <span class="text-sm text-gray-700">DFS</span>
+            </label>
+          </div>
+          
+          <button type="submit" class="btn-secondary w-full py-2.5 rounded-xl text-pink-700 font-medium text-sm">
+            Mulai Pencarian
+          </button>
+        </form>
+      </div>
     </div>
 
-    <!-- Clean footer -->
-    <div class="text-center mt-6">
-      <p class="text-gray-500 text-sm font-medium">
-        2025 Mesin Pencari Andal
+    <!-- Footer -->
+    <div class="text-center mt-4">
+      <p class="text-gray-500 text-xs">
+        © 2025 Search Engine Andal
       </p>
     </div>
   </div>
 
-  <!-- Minimal decorative elements -->
-  <div class="absolute top-32 right-16 w-2 h-2 bg-pink-400/40 rounded-full floating-orb" style="animation-delay: -2s;"></div>
-  <div class="absolute bottom-40 left-12 w-1.5 h-1.5 bg-rose-400/30 rounded-full floating-orb" style="animation-delay: -6s;"></div>
-  <div class="absolute top-2/3 right-8 w-3 h-3 bg-fuchsia-400/25 rounded-full floating-orb" style="animation-delay: -1s;"></div>
+  <!-- Small floating decorations -->
+  <div class="absolute top-24 right-12 w-2 h-2 bg-pink-400/20 rounded-full floating-element" style="animation-delay: -1s;"></div>
+  <div class="absolute bottom-32 left-8 w-1.5 h-1.5 bg-rose-400/15 rounded-full floating-element" style="animation-delay: -4s;"></div>
+  <div class="absolute top-1/2 right-6 w-2.5 h-2.5 bg-fuchsia-400/15 rounded-full floating-element" style="animation-delay: -6s;"></div>
 </body>
 </html>
