@@ -1,3 +1,3 @@
 SEED_URL = 'https://www.upi.edu/'
-MAX_PAGES = 100
+MAX_DEPTH = 5
 RESULT_LIMIT = 10

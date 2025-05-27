@@ -37,7 +37,7 @@
     <div class="mt-10">
       <h2 class="text-lg font-bold text-pink-500 mb-2">Seluruh Jalur ({{ algo|upper }})</h2>
       <div class="font-mono text-sm">
-        {% for url, depth in all_routes %}
+        {% for url, depth in all_routes_by_keyword %}
           <div class="pl-{{ depth*6 }}">
             {% if depth == 0 %}&gt;{% else %}{{ '-' * depth }}&gt;{% endif %}
             <a href="{{ url }}" class="text-pink-500 hover:underline break-all">{{ url }}</a>
