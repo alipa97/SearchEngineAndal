@@ -3,12 +3,12 @@ from bs4 import BeautifulSoup
 from urllib.parse import urljoin, urlparse
 from collections import deque
 from app.database import save_page
-from config import MAX_DEPTH
+from config import MAX_DEPTH, MAX_NEIGHBORS_PER_DEPTH
 
 def is_same_domain(url, seed_domain):
     return urlparse(url).netloc.endswith(seed_domain)
 
-def crawl(seed_url, max_depth=MAX_DEPTH):
+def crawl(seed_url, max_depth=MAX_DEPTH, max_neighbors_per_depth=MAX_NEIGHBORS_PER_DEPTH):
     visited = set()
     queue = deque([(seed_url, [seed_url], 0)])  # (url, path, depth)
     seed_domain = urlparse(seed_url).netloc
@@ -16,7 +16,6 @@ def crawl(seed_url, max_depth=MAX_DEPTH):
 
     current_depth = 0
     neighbors_this_depth = 0
-    max_neighbors_per_depth = 100
     next_level_queue = deque()
 
     while queue:

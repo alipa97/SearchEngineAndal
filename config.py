@@ -1,3 +1,4 @@
 SEED_URL = 'https://www.upi.edu/'
 MAX_DEPTH = 5
+MAX_NEIGHBORS_PER_DEPTH = 50
 RESULT_LIMIT = 10

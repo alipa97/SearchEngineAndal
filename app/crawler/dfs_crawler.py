@@ -2,8 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin, urlparse
 from app.database import save_page
-from config import MAX_DEPTH
-
+from config import MAX_DEPTH, MAX_NEIGHBORS_PER_DEPTH
+max_neighbors_per_depth = MAX_NEIGHBORS_PER_DEPTH
 def is_same_domain(url, seed_domain):
     return urlparse(url).netloc.endswith(seed_domain)
 
@@ -30,7 +30,10 @@ def crawl_dfs(seed_url, max_depth=MAX_DEPTH):
                 next_url = urljoin(current_url, link['href'])
                 if next_url not in visited and is_same_domain(next_url, seed_domain):
                     links.append(next_url)
-            for next_url in links:
+            # Batasi max 50 tetangga per depth
+            for i, next_url in enumerate(links):
+                if i >= max_neighbors_per_depth:
+                    break
                 dfs(next_url, path + [next_url], depth + 1)
         except Exception as e:
             print(f"Error crawling {current_url}: {e}")
